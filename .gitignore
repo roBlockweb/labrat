@@ -1,0 +1,7 @@
+# ignore real config with secrets
+config.yaml
+
+# ignore common temp files
+*.log
+.DS_Store
+

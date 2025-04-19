@@ -11,13 +11,7 @@
 # Python (pip) packages (installed in container)
 openai
 huggingface-hub
-selenium
 requests
-chromadb
-qdrant-client
-fastapi
-uvicorn
-beautifulsoup4
 python-dotenv
 #
 # Node (npm) packages (global, installed in container)

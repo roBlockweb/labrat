@@ -1,46 +1,28 @@
-FROM node:18-alpine
+FROM node:18-slim
 
-# Install system packages and utilities
-RUN apk add --no-cache bash curl git python3 py3-pip openjdk11-jre chromium chromium-chromedriver build-base libffi-dev
+RUN apt-get update && apt-get install -y \
+    bash curl git python3 python3-venv python3-pip build-essential libffi-dev && \
+    rm -rf /var/lib/apt/lists/*
+
+# Create Python virtual environment
+RUN python3 -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
 
 # Install Python packages
-RUN pip3 install --no-cache-dir \
+RUN pip install --no-cache-dir \
     openai \
     huggingface-hub \
-    selenium \
     requests \
-    chromadb \
-    qdrant-client \
-    fastapi \
-    uvicorn \
-    beautifulsoup4 \
-    python-dotenv \
-    pyyaml
+    python-dotenv
 
-# Install Node packages globally (Codex CLI, browser tools, AI helpers)
-RUN npm install -g \
-    @openai/codex \
-    playwright \
-    puppeteer \
-    jsdom \
-    browser-sync \
-    mcp
+# Install Codex CLI globally and fix module path
+RUN npm install -g @openai/codex && \
+    ln -s /usr/local/lib/node_modules/@openai/codex/dist /usr/local/dist
 
-# Patch the Codex CLI greeting to reflect LabRat v1.0
-RUN SCRIPTPATH=$(which codex) \
-    && sed -i 's/OpenAI Codex/OpenAI Codex LabRat v1.0/' "$SCRIPTPATH"
-
-# Copy validation script and chat wrapper
-# Copy configuration validator and chat retry tool
-COPY validate_config.py /usr/local/bin/validate_config.py
-COPY codex-chat-rat.sh /usr/local/bin/codex-chat-rat.sh
-RUN chmod +x /usr/local/bin/validate_config.py /usr/local/bin/codex-chat-rat.sh
-
-# Copy entrypoint script
-COPY entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh
+# Patch the Codex CLI greeting
+RUN SCRIPTPATH=$(which codex) && \
+    sed -i 's/OpenAI Codex/OpenAI Codex LabRat v1.0/' "$SCRIPTPATH"
 
 WORKDIR /workspace
-
-# Entrypoint
-ENTRYPOINT ["entrypoint.sh"]
+## Keep container alive for exec
+CMD ["tail", "-f", "/dev/null"]

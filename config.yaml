@@ -1,6 +1,0 @@
-# LabRat configuration file
-# Copy this to config.yaml and fill in your API keys
-
-openai_api_key: YOUR_OPENAI_API_KEY
-hf_api_token: YOUR_HUGGINGFACEHUB_API_TOKEN
-github_token: YOUR_GITHUB_TOKEN
