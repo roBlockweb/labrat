@@ -1,19 +1,51 @@
-FROM node:18-slim
+FROM node:20-slim
 
 RUN apt-get update && apt-get install -y \
-    bash curl git python3 python3-venv python3-pip build-essential libffi-dev && \
-    rm -rf /var/lib/apt/lists/*
+    bash \
+    curl \
+    git \
+    wget \
+    unzip \
+    sqlite3 \
+    poppler-utils \
+    build-essential \
+    chromium-browser \
+    chromium-driver \
+    postgresql \
+    postgresql-contrib \
+    python3 \
+    python3-venv \
+    python3-pip \
+    libpq-dev \
+    libffi-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 # Create Python virtual environment
 RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-# Install Python packages
+# Copy and install Python package dependencies
+COPY requirements.txt .
 RUN pip install --no-cache-dir \
     openai \
     huggingface-hub \
     requests \
-    python-dotenv
+    python-dotenv \
+    beautifulsoup4 \
+    pdfplumber \
+    langchain \
+    llama-index \
+    haystack \
+    sentence-transformers \
+    faiss-cpu \
+    chromadb \
+    openai-agents \
+    transformers \
+    psycopg2-binary \
+    sqlalchemy \
+    pandas \
+    numpy \
+    nltk
 
 # Install Codex CLI globally and fix module path
 RUN npm install -g @openai/codex && \

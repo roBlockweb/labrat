@@ -24,10 +24,10 @@ for key in openai_api_key hf_api_token github_token openwebui_url ollama_url pos
 done
 
 # Build and start container
-docker-compose build
+docker-compose up --build --remove-orphans -d
 
-docker-compose up --remove-orphans -d
+# Copy system prompt into container
+docker cp system_prompt.txt labrat:/system_prompt.txt
 
-# Launch Codex chat
-echo "Welcome to LabRat: enhanced Codex CLI"
-exec docker-compose exec labrat codex chat
+echo "Launching LabRat CLI..."
+exec docker-compose exec labrat codex chat --system-prompt-file /system_prompt.txt

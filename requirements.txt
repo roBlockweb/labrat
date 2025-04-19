@@ -13,7 +13,31 @@ openai
 huggingface-hub
 requests
 python-dotenv
-#
+# Web scraping & parsing
+beautifulsoup4
+pdfplumber
+
+# RAG & embeddings
+langchain
+llama-index
+haystack
+sentence-transformers
+faiss-cpu
+chromadb
+
+# LLM orchestration & agents
+openai-agents       # installs https://github.com/openai/openai-agents-python
+transformers
+
+# DB clients & utils
+psycopg2-binary
+sqlalchemy
+
+# Dev tooling
+pandas
+numpy
+nltk
+
 # Node (npm) packages (global, installed in container)
 @openai/codex
 playwright
