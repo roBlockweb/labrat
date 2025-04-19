@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -e
+
+# LabRat runner script
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$DIR"
+
+# Ensure config.yaml exists
+if [ ! -f config.yaml ]; then
+  cp config.yaml.example config.yaml
+  echo "Created 'config.yaml' from example. Please edit and add your API keys."
+  exit 0
+fi
+
+# Load API keys into environment
+export OPENAI_API_KEY=$(grep '^openai_api_key:' config.yaml | awk -F': ' '{print $2}')
+export HUGGINGFACEHUB_API_TOKEN=$(grep '^hf_api_token:' config.yaml | awk -F': ' '{print $2}')
+export GITHUB_TOKEN=$(grep '^github_token:' config.yaml | awk -F': ' '{print $2}')
+
+# Install Codex CLI if not already installed
+if ! command -v codex >/dev/null 2>&1; then
+  echo "Installing OpenAI Codex CLI..."
+  npm install -g @openai/codex
+fi
+
+echo "Starting LabRat container..."
+docker compose up --build -d
+
+echo "Launching Codex chat in container..."
+docker compose exec labrat /bin/bash -lc "codex-chat-rat.sh"

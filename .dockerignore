@@ -1,0 +1,8 @@
+node_modules
+npm-debug.log
+config.yaml
+*.md
+labrat
+Dockerfile
+entrypoint.sh
+docker-compose.yml

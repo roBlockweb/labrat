@@ -1,0 +1,38 @@
+# LabRat Host and Container Dependencies
+#
+# macOS (Homebrew)
+#   brew install docker docker-compose git node python3 openjdk@11 postgresql redis chromium mcp
+#
+# Ubuntu/Debian (apt)
+#   sudo apt update && sudo apt install -y \
+#     docker.io docker-compose git nodejs npm python3 python3-pip openjdk-11-jre \
+#     postgresql redis chromium-browser python3-dev build-essential libffi-dev
+#
+# Python (pip) packages (installed in container)
+openai
+huggingface-hub
+selenium
+requests
+chromadb
+qdrant-client
+fastapi
+uvicorn
+beautifulsoup4
+python-dotenv
+#
+# Node (npm) packages (global, installed in container)
+@openai/codex
+playwright
+puppeteer
+jsdom
+browser-sync
+mcp
+#
+# VS Code Extensions (optional, for host VS Code)
+ms-python.python
+ms-toolsai.jupyter-keymap
+ms-toolsai.jupyter-renderers
+esbenp.prettier-vscode
+ms-vscode.cpptools
+ms-azuretools.vscode-docker
+ms-vscode-remote.remote-containers

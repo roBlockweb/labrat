@@ -1,0 +1,12 @@
+# LabRat configuration file
+# Copy this to config.yaml and fill in your API keys
+
+openai_api_key: YOUR_OPENAI_API_KEY
+hf_api_token: YOUR_HUGGINGFACEHUB_API_TOKEN
+github_token: YOUR_GITHUB_TOKEN
+# Optional services and tools (set URLs if you enable these services in Docker Compose)
+openwebui_url: http://localhost:3000     # e.g. OpenWebUI
+ollama_url: http://localhost:11434        # e.g. Ollama language service
+postgres_url: postgresql://labrat:labrat@localhost:5432/labrat
+chromadb_url: http://localhost:8000      # ChromaDB API endpoint
+qdrant_url: http://localhost:6333        # Qdrant vector DB endpoint
