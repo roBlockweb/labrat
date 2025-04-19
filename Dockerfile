@@ -9,8 +9,7 @@ RUN apt-get update && apt-get install -y \
     sqlite3 \
     poppler-utils \
     build-essential \
-    chromium-browser \
-    chromium-driver \
+    chromium \
     postgresql \
     postgresql-contrib \
     python3 \
@@ -48,7 +47,7 @@ RUN pip install --no-cache-dir \
     nltk
 
 # Install Codex CLI globally and fix module path
-RUN npm install -g @openai/codex && \
+RUN npm install -g @openai/codex browser-use && \
     ln -s /usr/local/lib/node_modules/@openai/codex/dist /usr/local/dist
 
 # Patch the Codex CLI greeting

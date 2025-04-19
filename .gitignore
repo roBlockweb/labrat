@@ -1,20 +1,8 @@
-# Ignore node modules
-node_modules/
-
-# Ignore npm package files (we don’t use them in this repo)
-package.json
-package-lock.json
-
-# Python env and caches
+# Ignore local configuration and caches
+config.yaml
+.env
 __pycache__/
 *.pyc
-venv*/
-
-# Local config (copy config.yaml.example to config.yaml locally)
-config.yaml
-
-# Screenshots and generated images
-*.png
-
-# Misc
+*.pyo
+Dockerfile.user
 .DS_Store
