@@ -1,7 +1,20 @@
-# ignore real config with secrets
+# Ignore node modules
+node_modules/
+
+# Ignore npm package files (we don’t use them in this repo)
+package.json
+package-lock.json
+
+# Python env and caches
+__pycache__/
+*.pyc
+venv*/
+
+# Local config (copy config.yaml.example to config.yaml locally)
 config.yaml
 
-# ignore common temp files
-*.log
-.DS_Store
+# Screenshots and generated images
+*.png
 
+# Misc
+.DS_Store
